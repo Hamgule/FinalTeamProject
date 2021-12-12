@@ -1,0 +1,137 @@
+* {
+  font-family: 'Nanum Gothic';
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(45deg, #3fe, #48f) no-repeat;
+}
+
+.login-form {
+  position: relative;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 10px 5px #00000033;
+}
+
+.login-form h1 {
+  text-align: center;
+  color: #48f;
+  margin-bottom: 50px;
+}
+
+.input-area {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.input-area label {
+  color: #888;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all .5s;
+}
+
+.input-area input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #aaa;
+  transition: all .5s;
+}
+
+.input-area input:focus {
+  border-color: #48f;
+}
+
+.input-area input:focus ~ label {
+  color: #48f;
+}
+
+.button-area {
+  position: relative;
+  margin-top: 30px;
+}
+
+.button-area input { display: none; }
+.button-area label {
+  display: block;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+  width: 100%; height: 50px;
+  background-color: #48f;
+  border-radius: 50px;
+  box-sizing: border-box;
+}
+
+.button-area div {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-area span {
+  width: 100%; height: 50px;
+  background-color: #000;
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50px;
+  transition: all .3s;
+  opacity: 0;
+}
+.button-area:hover span { opacity: .2; }
+.button-area:active span { opacity: .5; }
+
+.caption {
+  margin-top: 20px;
+  text-align: center;
+}
+.caption a {
+  font-size: 15px;
+  color: #999;
+  text-decoration: none;
+}
+.caption a:hover {
+  color: #48f;
+}
+.caption a:active {
+  color: #000;
+}
+
+.back-button {
+	width: 20px; height: 20px;
+  float: right;
+  position: relative;
+  cursor: pointer;
+}
+
+.back-button span {
+  position: absolute;
+  background-color: #999;
+  width: 100%; height: 10%;
+  border-radius: 20px;
+  top: 50%;
+}
+
+.back-button:hover span {
+  background-color: #777;
+}
+.back-button:active span {
+  background-color: #555;
+}
+
+
+.back-button .back-1 { transform: rotate(-45deg); }
+.back-button .back-2 { transform: rotate(45deg); }
