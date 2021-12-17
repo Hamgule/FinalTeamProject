@@ -4,7 +4,7 @@
 
 <mapper namespace="UserDAO">
 	<insert id="insertUser">
-	insert into USERS (username, sha1(password)) values (#{username}, #{password})
+	insert into USERS (username, password) values (#{username}, #{password})
 	</insert>
 	<update id="updateUser">
 	update USERS set username=#{username}, password=#{password} where sid=#{sid}

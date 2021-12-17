@@ -13,27 +13,22 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Override
 	public int insertUser(UserVO vo) {
-		System.out.println("insertUser");
 		return sqlSession.insert("USerDAO.insertUser", vo);
 	}
 	@Override
 	public int updateUser(UserVO vo) {
-		System.out.println("updateUser");
 		return sqlSession.update("USerDAO.updateUser", vo);
 	}
 	@Override
 	public int deleteUser(int id) {
-		System.out.println("deleteUser");
 		return sqlSession.delete("USerDAO.deleteUser", id);
 	}
 	@Override
 	public UserVO getUser(UserVO vo) {
-		System.out.println("getUser");
 		return sqlSession.selectOne("UserDAO.getUser", vo);
 	}
 	@Override
 	public List<UserVO> getUserList() {
-		System.out.println("getUserList");
 		return sqlSession.selectList("UserDAO.getUserList");
 	}
 

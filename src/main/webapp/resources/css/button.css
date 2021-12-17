@@ -1,0 +1,100 @@
+.btn {
+	display: inline-block;
+	width: 15px; height: 15px;
+	cursor: pointer;
+	opacity: 1;
+	transition: all .2s;
+	transform: translateY(-10%);
+	vertical-align: middle;
+}
+.btn input[type="button"] { display: none; }
+
+.btn:hover { opacity: .5; }
+.btn-scale:hover { transform: translateY(-10%) scale(1.2); }
+
+.btn label {
+	display: flex;
+	position: relative;
+	width: 100%; height: 100%;
+	cursor: pointer;
+	transition: all .2s;
+}
+
+.btn-edit {
+	height: 18px;
+}
+
+.btn-create span::before, .btn-create span::after {
+	position: absolute;
+	background-color: #4f8;
+	border-radius: 5px;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.btn-create span::before { 
+	content: ''; 
+	width: 100%; height: 2px; 
+}
+.btn-create span::after { 
+	content: ''; 
+	width: 2px; height: 100%;
+}
+
+.btn-delete span::before, .btn-delete span::after {
+	position: absolute;
+	width: 110%; height: 2px;
+	background-color: #f48;
+	border-radius: 5px;
+	top: 50%; left: 50%;
+}
+.btn-delete span::before { content: ''; transform: translate(-50%, -50%) rotate(45deg); }
+.btn-delete span::after { content: ''; transform: translate(-50%, -50%) rotate(-45deg); }
+
+.btn-red { color: #f48; }
+.btn-blue { color: #48f; }
+.btn-green { color: #4f8; }
+.btn-gray { color: #aaa; }
+
+
+.btn-closeform {
+	position: absolute;
+	top: 20px; right: 20px;
+}
+
+.btn-closeform span::before, .btn-closeform span::after {
+	background-color: #aaa;
+}
+
+
+.button-area { position: relative; }
+.button-area input { display: none; }
+.button-area label {
+  display: block;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+  width: 100%; height: 50px;
+  background-color: #48f;
+  border-radius: 50px;
+  box-sizing: border-box;
+}
+
+.button-area div {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-area span {
+  width: 100%; height: 50px;
+  background-color: #000;
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50px;
+  transition: all .3s;
+  opacity: 0;
+}
+.button-area:hover span { opacity: .2; }
+.btn-container:active span { opacity: .5; }
+

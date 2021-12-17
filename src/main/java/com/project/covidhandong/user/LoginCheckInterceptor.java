@@ -13,8 +13,15 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("login");
+		String requestUri = request.getRequestURI().toString();
+		String contextPath = request.getContextPath().toString();
+		
+		if(requestUri.equals(contextPath + "/") || 
+			requestUri.equals(contextPath + "/home")) return true;
+
 		if (obj == null) {
-			response.sendRedirect(request.getContextPath() + "/");
+			System.out.println("[Warning] Unconfirmed access without login");
+			response.sendRedirect(contextPath + "/login/login");
 			return false;
 		}
 		return true;

@@ -4,18 +4,20 @@
 
 <mapper namespace="BoardDAO">
 	<insert id="insertBoard">
-	insert into BOARD (title, writer, content) values (#{title}, #{writer}, #{content})
+	insert into CONFIRMED (number, writer, footTraffic, confirmedDate, residence, detailRes) 
+	values (#{number}, #{writer}, #{footTraffic}, #{confirmedDate}, #{residence}, #{detailRes})
 	</insert>
 	<update id="updateBoard">
-	update BOARD set title=#{title}, content=#{content} where seq=#{seq}
+	update CONFIRMED set number=#{number}, writer=#{writer}, footTraffic=#{footTraffic}, 
+	confirmedDate=#{confirmedDate}, residence=#{residence}, detailRes=#{detailRes} where id=#{id}
 	</update>
 	<delete id="deleteBoard">
-	delete from BOARD where seq=#{seq}
+	delete from CONFIRMED where id=#{id}
 	</delete>
 	<select id="getBoard" resultType="board">
-	select * from BOARD where seq=#{seq}
+	select * from CONFIRMED where id=#{id}
 	</select>
 	<select id="getBoardList" resultType="board">
-	select * from BOARD order by seq desc
+	select * from CONFIRMED order by id desc
 	</select>
 </mapper>

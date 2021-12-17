@@ -24,7 +24,7 @@ body {
   background-color: #48f;
   border-radius: 30px;
   box-shadow: 0 0 10px 5px #00000033;
-  animation: slime .6s .2s;
+  animation: slime .5s .2s;
 }
 
 @keyframes slime {

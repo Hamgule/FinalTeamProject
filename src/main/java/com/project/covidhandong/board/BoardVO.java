@@ -1,26 +1,26 @@
 package com.project.covidhandong.board;
 
-import java.util.Date;
-
 public class BoardVO {
-	private int seq;
-	private String title;
+	private int id;
+	private int number;
 	private String writer;
-	private String content;
-	private Date regdate;
-	private int cnt;
+	private String footTraffic;
+	private String confirmedDate;
+	private String residence;
+	private String detailRes;
+	private String postDate;
 	
-	public int getSeq() {
-		return seq;
+	public int getId() {
+		return id;
 	}
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+	public int getNumber() {
+		return number;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 	public String getWriter() {
 		return writer;
@@ -28,22 +28,35 @@ public class BoardVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getContent() {
-		return content;
+	public String getFootTraffic() {
+		return footTraffic;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setFootTraffic(String footTraffic) {
+		this.footTraffic = footTraffic;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public String getConfirmedDate() {
+		return confirmedDate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setConfirmedDate(String confirmedDate) {
+		this.confirmedDate = confirmedDate;
 	}
-	public int getCnt() {
-		return cnt;
+	public String getResidence() {
+		return residence;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setResidence(String residence) {
+		this.residence = residence;
 	}
+	public String getDetailRes() {
+		return detailRes;
+	}
+	public void setDetailRes(String detailRes) {
+		this.detailRes = detailRes;
+	}
+	public String getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+	}
+	
 }

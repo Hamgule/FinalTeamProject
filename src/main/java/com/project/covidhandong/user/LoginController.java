@@ -26,21 +26,23 @@ public class LoginController {
 		}
 		UserVO loginvo = service.getUser(vo);
 		if (loginvo != null) {
-			System.out.println("로그인 성공!");
+			System.out.println("[INFO] '" + loginvo.getUsername() + "' Logged In");
 			session.setAttribute("login", loginvo);
 			returnURL = "redirect:/board/list";
 		} 
 		else {
-			System.out.println("로그인 실패!");
+			System.out.println("[ERROR] Login Failed");
 			returnURL = "redirect:/login/login";
 		}
 		return returnURL;
 	}
 
 	// 로그아웃 하는 부분 
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session, UserVO vo) {
+		UserVO loginvo = service.getUser(vo);
 		session.invalidate();
-		return "redirect:/login/login"; 
+		System.out.println("[INFO] '" + loginvo.getUsername() + "' Logged Out");
+		return "redirect:/login/login";
 	}
 }

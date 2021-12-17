@@ -9,11 +9,12 @@
 <meta charset="UTF-8">
 <title>login</title>
 <link rel="stylesheet" href="${path}/resources/css/login.css">
+<link rel="stylesheet" href="${path}/resources/css/button.css">
 
 </head>
 <body>
 	<section class="login-form">
-		<div class="back-button" onclick="location.href=document.referrer">
+		<div class="back-button" onclick="location.href='${path}/'">
 			<span class="back-1"></span>
 			<span class="back-2"></span>
 		</div>
@@ -32,9 +33,11 @@
 				<label for="submit"><div>LOGIN</div><span></span></label>
 			</div>
 		</form>
+		<!-- 
 		<div class="caption">
 			<a href="">Forgot Password?</a>
 		</div>
+		 -->
 	</section>
 </body>
 </html>
