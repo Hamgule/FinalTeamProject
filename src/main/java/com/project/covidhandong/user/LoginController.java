@@ -29,15 +29,27 @@ public class LoginController {
 			System.out.println("[INFO] '" + loginvo.getUsername() + "' Logged In");
 			session.setAttribute("login", loginvo);
 			returnURL = "redirect:/board/list";
-		} 
-		else {
+		} else {
 			System.out.println("[ERROR] Login Failed");
 			returnURL = "redirect:/login/login";
 		}
 		return returnURL;
 	}
 
-	// 로그아웃 하는 부분 
+	// register부분
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String signUp() {
+		return "register/register";
+	}
+
+	@RequestMapping(value = "/registerok", method = RequestMethod.POST)
+	public String signUpOk(HttpSession session, UserVO vo) {
+		service.insertUser(vo);
+
+		return "redirect:/login/login";
+	}
+
+	// 濡쒓렇�븘�썐 �븯�뒗 遺�遺�
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session, UserVO vo) {
 		UserVO loginvo = service.getUser(vo);

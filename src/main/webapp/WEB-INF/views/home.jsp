@@ -16,7 +16,7 @@
 		<h1>CoVID Handong</h1>
 		<div class="sign-area">
 			<div class="button-area">
-				<button id="sign-up"></button>
+				<button id="sign-up" onclick="location.href='register/register'"></button>
 				<label for="sign-up">SIGN UP</label>
 				<span></span>
 			</div>
