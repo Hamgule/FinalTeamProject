@@ -13,15 +13,15 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Override
 	public int insertUser(UserVO vo) {
-		return sqlSession.insert("USerDAO.insertUser", vo);
+		return sqlSession.insert("UserDAO.insertUser", vo);
 	}
 	@Override
 	public int updateUser(UserVO vo) {
-		return sqlSession.update("USerDAO.updateUser", vo);
+		return sqlSession.update("UserDAO.updateUser", vo);
 	}
 	@Override
 	public int deleteUser(int id) {
-		return sqlSession.delete("USerDAO.deleteUser", id);
+		return sqlSession.delete("UserDAO.deleteUser", id);
 	}
 	@Override
 	public UserVO getUser(UserVO vo) {
