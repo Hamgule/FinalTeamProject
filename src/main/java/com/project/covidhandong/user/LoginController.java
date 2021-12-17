@@ -39,7 +39,7 @@ public class LoginController {
 	// register부분
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String signUp() {
-		return "register/register";
+		return "login/register";
 	}
 
 	@RequestMapping(value = "/registerok", method = RequestMethod.POST)

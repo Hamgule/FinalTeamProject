@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<link rel="stylesheet" href="register.css">
-<link rel="stylesheet" href="button.css">
+<link rel="stylesheet" href="${path}/resources/css/register.css">
+<link rel="stylesheet" href="${path}/resources/css/button.css">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 			<span class="back-2"></span>
 		</div>
 		<h1>Register</h1>
-		<form action="/registerok" method="post">
+		<form action="registerok" method="post">
 			<div class="input-area">
 				<input type="text" name="username" id="id" autocomplete="off" placeholder="Username" required>
 				<label for="id">USER NAME</label>
