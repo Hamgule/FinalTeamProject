@@ -20,4 +20,16 @@
 	<select id="getBoardList" resultType="board">
 	select * from CONFIRMED order by id desc
 	</select>
+	<select id="getFoundList" parameterType="string" resultType="board">
+	select * from CONFIRMED where 
+	id like concat ('%', #{toFind}, '%') or
+	writer like concat ('%', #{toFind}, '%') or
+	footTraffic like concat ('%', #{toFind}, '%') or
+	residence like concat ('%', #{toFind}, '%') or
+	detailRes like concat ('%', #{toFind}, '%')
+	order by id desc
+	</select>
+	<select id="getOrderedList" resultType="board">
+	select * from CONFIRMED order by #{orderColumn}
+	</select>
 </mapper>

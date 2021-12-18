@@ -18,6 +18,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	var editPopped = false;
+	var delClicked = false;
+	
 	$(document).ready(function() {
 		var lastId = $("#last-id").html();
 		
@@ -27,6 +29,7 @@
 		$("#close-editform").click(function() { pop_editpost(false); });
 		$("#close-showbox").click(function() { pop_showbox(false); });
 		$(".list-logout").click(function() { logout_ok(); });
+		$("")
 		
 		for (var i = 0; i < lastId; i++) fit_format(i + 1);
 	});
@@ -70,12 +73,17 @@
 	}
 	
 	function delete_ok(id) {
+		delClicked = true;
 		var a = confirm("정말로 삭제하겠습니까?");
 		if(a) location.href='deleteok/' + id;
 	}
 
 	function pop_showbox(popup) {
-		if (popup) { if (!editPopped) $("#show-container").fadeIn(300); }
+		if (popup) { 
+			if (delClicked) $("#show-container").hide();
+			else if (!editPopped) $("#show-container").fadeIn(300); 
+			delClicked = false;
+		}
 		else $("#show-container").fadeOut(300);
 	}
 	
@@ -88,11 +96,34 @@
 		$("#show-footTraffic").html(footTraffic);
 	}
 	
+	function search() {
+		/**/
+	}
+	
 </script>
 </head>
 <body>
 <div class="board-container">
 	<h1>CoVID Handong</h1>
+	
+	<div class="search-container">
+		<form action="search">
+			<table>
+				<tr>
+					<td><input type="text" placeholder="Search ..." id="search-ipt" name="toFind"/></td>
+					<td>
+						<div class="btn btn-gray btn-scale btn-edit">
+							<label>
+								<i id="search-icon" class='fas fa-search'></i>
+								<input style="display: none;" type="submit">
+							</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
 	<div class="list-logout btn btn-blue">LOGOUT</div>
 	<div class="member-info">
 		<em><i>${user.getUsername()}</i> 님 환영합니다</em>
@@ -154,7 +185,7 @@
 	    </div>
 		<table id="add">
 			<tr><th>작성자</th><td><input type="text" name="writer" value="${user.getUsername()}" readonly/></td></tr>
-			<tr><th>확진일자</th><td><input type="date" name="confirmedDate"/></td></tr>
+			<tr><th>확진일자</th><td><input type="date" name="confirmedDate" required/></td></tr>
 			<tr><th>거주지</th>
 				<td>
 					<div class="radio-container">
@@ -185,7 +216,7 @@
 	    </div>
 		<table id="edit">
 			<tr><th>작성자</th><td><input type="text" name="writer" value="${user.getUsername()}" readonly/></td></tr>
-			<tr><th>확진일자</th><td><input id="confirmedDate" type="date" name="confirmedDate" value=""/></td></tr>
+			<tr><th>확진일자</th><td><input id="confirmedDate" type="date" name="confirmedDate" value="" required/></td></tr>
 			<tr><th>거주지</th>
 				<td>
 					<div class="radio-container">
@@ -222,12 +253,6 @@
 			</tr>
 			<tr><th id="ft-row">동선</th><td colspan="3"><p id="show-footTraffic"></p></td></tr>
 		</table>
-		
-		
-		<div>
-			
-		</div>
-		
 		<br>
 	</form>
 </div>

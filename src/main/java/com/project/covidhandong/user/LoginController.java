@@ -36,7 +36,7 @@ public class LoginController {
 		return returnURL;
 	}
 
-	// register부분
+	// register 부분
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String signUp() {
 		return "login/register";
@@ -49,7 +49,7 @@ public class LoginController {
 		return "redirect:/login/login";
 	}
 
-	// 濡쒓렇�븘�썐 �븯�뒗 遺�遺�
+	// logout
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session, UserVO vo) {
 		UserVO loginvo = service.getUser(vo);

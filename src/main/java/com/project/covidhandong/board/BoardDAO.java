@@ -8,4 +8,6 @@ public interface BoardDAO {
 	public int deleteBoard(int id);
 	public BoardVO getBoard(BoardVO vo);
 	public List<BoardVO> getBoardList();
+	public List<BoardVO> getFoundList(String toFind);
+	public List<BoardVO> getOrderedList(String orderColumn);
 }

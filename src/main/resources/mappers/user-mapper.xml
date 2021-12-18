@@ -4,16 +4,16 @@
 
 <mapper namespace="UserDAO">
 	<insert id="insertUser">
-	insert into USERS (username, password) values (#{username}, #{password})
+	insert into USERS (username, password) values (#{username}, sha1(#{password}))
 	</insert>
 	<update id="updateUser">
-	update USERS set username=#{username}, password=#{password} where sid=#{sid}
+	update USERS set username=#{username}, password=sha1(#{password}) where sid=#{sid}
 	</update>
 	<delete id="deleteUser">
 	delete from USERS where sid=#{sid}
 	</delete>
 	<select id="getUser" resultType="User">
-	select sid, username from USERS where username=#{username} and password=#{password}
+	select sid, username from USERS where username=#{username} and password=sha1(#{password})
 	</select>
 	<select id="getUserList" resultType="User">
 	select * from USERS order by sid desc

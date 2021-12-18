@@ -162,5 +162,33 @@ body {
 	width: 10px; height: 10px;
 }
 
-#show tr { height: 10%; }
-#show tr#ft-row { height: 40%; }
+#show { height: auto; }
+#show tr { height: 50px; }
+#show tr:nth-child(3) { height: 200px; }
+#show p { margin: 0; }
+
+#showbox {
+	height: auto;
+}
+
+.search-container {
+	position: relative;
+	float: left;
+	width: auto;
+	margin-bottom: 15px;
+}
+.search-container td { 
+	padding: 5px;
+}
+
+.search-container input {
+	padding: 5px;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #ddd;
+	transition: .3s;
+}
+
+.search-container input:focus {
+	border-color: #48f;
+}

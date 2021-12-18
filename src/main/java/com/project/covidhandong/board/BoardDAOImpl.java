@@ -1,6 +1,8 @@
 package com.project.covidhandong.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,24 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<BoardVO> getBoardList() {
 		List<BoardVO> list = sqlSession.selectList("BoardDAO.getBoardList");
+		
+		return list;
+	}
+	@Override
+	public List<BoardVO> getFoundList(String toFind) {
+		Map<String, String> param = new HashMap<String, String>();
+		
+		param.put("toFind", toFind);
+		List<BoardVO> list = sqlSession.selectList("BoardDAO.getFoundList", param);
+		
+		return list;
+	}
+	@Override
+	public List<BoardVO> getOrderedList(String orderColumn) {
+		Map<String, String> param = new HashMap<String, String>();
+		
+		param.put("orderColumn", orderColumn);
+		List<BoardVO> list = sqlSession.selectList("BoardDAO.getOrderedList", param);
 		
 		return list;
 	}

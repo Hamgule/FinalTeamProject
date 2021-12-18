@@ -16,8 +16,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVO> getBoardList(){
+	public List<BoardVO> getBoardList() {
 		return boardDAO.getBoardList();
+	}
+	
+	@Override
+	public List<BoardVO> getFoundList(String toFind) {
+		return boardDAO.getFoundList(toFind);
+	}
+
+	@Override
+	public List<BoardVO> getOrderedList(String orderColumn) {
+		return boardDAO.getOrderedList(orderColumn);
 	}
 	
 	@Override

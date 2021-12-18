@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.covidhandong.user.UserService;
-import com.project.covidhandong.user.UserVO;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -20,7 +20,7 @@ public class BoardController {
 	UserService userService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String boardlist(Model model, HttpSession session, UserVO vo) {
+	public String boardlist(Model model, HttpSession session) {
 		model.addAttribute("list", boardService.getBoardList());
 		model.addAttribute("user", session.getAttribute("login"));
 		return "board/posts";
@@ -65,5 +65,15 @@ public class BoardController {
 		if (i == 0) System.out.println("[ERROR] Delete Failed");
 		else System.out.println("[INFO] " + id + numEnds + " post deleted");
 		return "redirect:../list";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String findPost(Model model, @RequestParam("toFind") String toFind, HttpSession session) {
+		
+		if (toFind.equals("")) return "redirect:list";
+		
+		model.addAttribute("list", boardService.getFoundList(toFind));
+		model.addAttribute("user", session.getAttribute("login"));
+		return "board/posts";
 	}
 }
