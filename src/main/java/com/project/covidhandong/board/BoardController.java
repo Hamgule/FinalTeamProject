@@ -1,5 +1,7 @@
 package com.project.covidhandong.board;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,15 @@ public class BoardController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String boardlist(Model model, HttpSession session) {
-		model.addAttribute("list", boardService.getBoardList());
+		List<BoardVO> list = boardService.getBoardList();
+		
+		int lastId = 0;
+		for (BoardVO vo : list) lastId = lastId < vo.getId() ? vo.getId() : lastId;
+
+		model.addAttribute("list", list);
 		model.addAttribute("user", session.getAttribute("login"));
+		model.addAttribute("lastId", lastId);
+		
 		return "board/posts";
 	}
 	
@@ -69,11 +78,41 @@ public class BoardController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String findPost(Model model, @RequestParam("toFind") String toFind, HttpSession session) {
-		
 		if (toFind.equals("")) return "redirect:list";
 		
-		model.addAttribute("list", boardService.getFoundList(toFind));
+		List<BoardVO> list = boardService.getFoundList(toFind);
+		
+		int lastId = 0;
+		for (BoardVO vo : list) lastId = lastId < vo.getId() ? vo.getId() : lastId;
+
+		model.addAttribute("list", list);
 		model.addAttribute("user", session.getAttribute("login"));
+		model.addAttribute("lastId", lastId);
+		
+		return "board/posts";
+	}
+
+	@RequestMapping(value = "/sort", method = RequestMethod.GET)
+	public String findPost(Model model, HttpSession session,
+			@RequestParam("orderColumn") String orderColumn, 
+			@RequestParam("orderDir") String orderDir) {
+		
+		model.addAttribute("orderColumn", orderColumn);
+		model.addAttribute("orderDir", orderDir);
+
+		if (orderDir.equals("0")) return "redirect:list";
+		else if (orderDir.equals("1")) orderDir = "";
+		else orderDir = "desc";
+		
+		List<BoardVO> list = boardService.getOrderedList(orderColumn, orderDir);
+		
+		int lastId = 0;
+		for (BoardVO vo : list) lastId = lastId < vo.getId() ? vo.getId() : lastId;
+
+		model.addAttribute("list", list);
+		model.addAttribute("user", session.getAttribute("login"));
+		model.addAttribute("lastId", lastId);
+		
 		return "board/posts";
 	}
 }

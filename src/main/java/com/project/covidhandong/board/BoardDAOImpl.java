@@ -45,10 +45,11 @@ public class BoardDAOImpl implements BoardDAO {
 		return list;
 	}
 	@Override
-	public List<BoardVO> getOrderedList(String orderColumn) {
+	public List<BoardVO> getOrderedList(String orderColumn, String orderDir) {
 		Map<String, String> param = new HashMap<String, String>();
 		
 		param.put("orderColumn", orderColumn);
+		param.put("orderDir", orderDir);
 		List<BoardVO> list = sqlSession.selectList("BoardDAO.getOrderedList", param);
 		
 		return list;

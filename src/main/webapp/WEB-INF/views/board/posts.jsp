@@ -19,17 +19,20 @@
 <script>
 	var editPopped = false;
 	var delClicked = false;
+	var lastId = 0;
 	
 	$(document).ready(function() {
-		var lastId = $("#last-id").html();
+		lastId = $("#last-id").attr("value");
 		
+		sort_view();
+		order_icon();
 		$(".form-container").hide();
 		$("#create").click(function() { pop_addpost(true); });
 		$("#close-addform").click(function() { pop_addpost(false); });
 		$("#close-editform").click(function() { pop_editpost(false); });
 		$("#close-showbox").click(function() { pop_showbox(false); });
 		$(".list-logout").click(function() { logout_ok(); });
-		$("")
+		$(".allow-sort").click(function() { order_icon(); $("#sort-submit").trigger("click"); });
 		
 		for (var i = 0; i < lastId; i++) fit_format(i + 1);
 	});
@@ -96,8 +99,66 @@
 		$("#show-footTraffic").html(footTraffic);
 	}
 	
-	function search() {
-		/**/
+	function order_icon() {
+		$("#sort-id").click(function() { toggle_number("#sort-id", "id"); });
+		$("#sort-writer").click(function() { toggle_number("#sort-writer", "writer"); });
+		$("#sort-confirmedDate").click(function() { toggle_number("#sort-confirmedDate", "confirmedDate"); });
+		$("#sort-footTraffic").click(function() { toggle_number("#sort-footTraffic", "footTraffic"); });
+		$("#sort-residence").click(function() { toggle_number("#sort-residence", "residence"); });
+		$("#sort-postDate").click(function() { toggle_number("#sort-postDate", "postDate"); });
+	}
+	
+	function toggle_number(ident, header) {
+		var col = $("#sort-col").attr("value");
+		var dir = parseInt($("#sort-dir").attr("value"));
+		
+		if (isNaN(dir)) dir = 0;
+		
+		$("#sort-col").attr("value", header);
+		$("#sort-dir").attr("value", (dir + 1) % 3); 
+		
+		show_sortIcons(header);
+	}
+	
+	function hide_sortIcons() {
+		hide_sortIcon("#label-id");
+		hide_sortIcon("#label-writer");
+		hide_sortIcon("#label-confirmedDate");
+		hide_sortIcon("#label-footTraffic");
+		hide_sortIcon("#label-residence");
+		hide_sortIcon("#label-postDate");
+	}
+	
+	function hide_sortIcon(ident) {
+		$(ident).css("display", "none");
+		$(ident).children(".fa-caret-up").css("display", "none");
+		$(ident).children(".fa-caret-down").css("display", "none");
+	}
+	
+	function show_sortIcons(header) {
+		show_sortIcon("#label-" + header);
+	}
+	
+	function show_sortIcon(ident) {
+		if ($("#sort-dir").attr("value") !== "0") { 
+			$(ident).css("display", "inline-block"); 
+			if ($("#sort-dir").attr("value") === "1") {
+				$(ident).children(".fa-caret-up").css("display", "flex");
+				$(ident).children(".fa-caret-down").css("display", "none");
+			}
+			else {
+				$(ident).children(".fa-caret-up").css("display", "none");
+				$(ident).children(".fa-caret-down").css("display", "flex");
+			}
+		}
+		else hide_sortIcon(ident);
+	}
+	
+	function sort_view() {
+		var col = $("#sort-col").attr("value");
+		var dir = $("#sort-dir").attr("value");
+		
+		show_sortIcon("#label-" + col);
 	}
 	
 </script>
@@ -105,6 +166,8 @@
 <body>
 <div class="board-container">
 	<h1>CoVID Handong</h1>
+	
+	<input id="last-id" type="hidden" value="${lastId}"/>
 	
 	<div class="search-container">
 		<form action="search">
@@ -129,6 +192,14 @@
 		<em><i>${user.getUsername()}</i> 님 환영합니다</em>
 	</div>
 	
+	<div class="sort-container">
+		<form id="sortform" action="sort">
+			<input id="sort-col" type="hidden" name="orderColumn" value="${orderColumn}">
+			<input id="sort-dir" type="hidden" name="orderDir" value="${orderDir}">
+			<input style="display: none;" id="sort-submit" type="submit"/>
+		</form>
+	</div>
+	
 	<table id="list">
 	<tr>
 		<th style="width: 15px;">
@@ -137,25 +208,37 @@
 		      <label for="create"><span></span></label>
 		    </div>
 		</th>
-		<th>번호</th>
-		<th>작성자</th>
-		<th>확진판정일</th>
-		<th>동선</th>
-		<th>거주지</th>
-		<th>작성일</th>
+		<!-- <th class="allow-sort" id="sort-id">번호
+			<label id="label-id"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th> -->
+		<th class="allow-sort" id="sort-writer">작성자
+			<label id="label-writer"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th>
+		<th class="allow-sort" id="sort-confirmedDate">확진판정일
+			<label id="label-confirmedDate"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th>
+		<th class="allow-sort" id="sort-footTraffic">동선
+			<label id="label-footTraffic"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th>
+		<th class="allow-sort" id="sort-residence">거주지
+			<label id="label-residence"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th>
+		<th class="allow-sort" id="sort-postDate">작성일
+			<label id="label-postDate"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></label>
+		</th>
 		<th>수정</th>
 		<th>삭제</th>
 	</tr>
 	<c:forEach items="${list}" var="u">
 		<tr id="show-${u.getId()}" onclick="fill_showbox('${u.getId()}', '${u.getWriter()}', '${u.getConfirmedDate()}', '${u.getResidence()}', '${u.getDetailRes()}', '${u.getFootTraffic()}')">
-			<td id="last-id">${u.getId()}</td>
-			<td>${u.getNumber()}</td>
-			<td>${u.getWriter()}</td>
-			<td>${u.getConfirmedDate()}</td>
-			<td id="ft-col-${u.getId()}">${u.getFootTraffic()}</td>
-			<td>${u.getResidence()}</td>
-			<td id="pd-col-${u.getId()}">${u.getPostDate()}</td>
-			<td>
+			<td style="width: 8%;" id="last-id">${u.getId()}</td>
+			<%-- <td style="width: 8%;">${u.getNumber()}</td> --%>
+			<td style="width: 8%;">${u.getWriter()}</td>
+			<td style="width: 16%;">${u.getConfirmedDate()}</td>
+			<td style="width: 24%;" id="ft-col-${u.getId()}">${u.getFootTraffic()}</td>
+			<td style="width: 8%;">${u.getResidence()}</td>
+			<td style="width: 16%;"id="pd-col-${u.getId()}">${u.getPostDate()}</td>
+			<td style="width: 8%;">
 				<c:if test="${user.getUsername() eq u.getWriter() or user.getUsername() eq 'admin'}">
 					<div class="btn btn-blue btn-scale btn-edit" 
 						onclick="edit_ok('${u.getId()}', '${u.getConfirmedDate()}', '${u.getResidence()}', '${u.getDetailRes()}', '${u.getFootTraffic()}')">
@@ -163,7 +246,7 @@
 					</div>
 				</c:if>
 			</td>
-			<td>
+			<td style="width: 8%;">
 				<c:if test="${user.getUsername() eq u.getWriter() or user.getUsername() eq 'admin'}">	
 					<div class="btn btn-scale btn-delete">
 				      <input type="button" id="delete-${u.getId()}" onclick="delete_ok('${u.getId()}')">

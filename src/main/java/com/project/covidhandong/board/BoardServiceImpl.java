@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getOrderedList(String orderColumn) {
-		return boardDAO.getOrderedList(orderColumn);
+	public List<BoardVO> getOrderedList(String orderColumn, String orderDir) {
+		return boardDAO.getOrderedList(orderColumn, orderDir);
 	}
 	
 	@Override

@@ -9,5 +9,5 @@ public interface BoardDAO {
 	public BoardVO getBoard(BoardVO vo);
 	public List<BoardVO> getBoardList();
 	public List<BoardVO> getFoundList(String toFind);
-	public List<BoardVO> getOrderedList(String orderColumn);
+	public List<BoardVO> getOrderedList(String orderColumn, String orderDir);
 }
